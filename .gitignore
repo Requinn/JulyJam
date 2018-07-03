@@ -42,5 +42,4 @@ sysinfo.txt
 **/FMODStudioCache.asset.meta
 
 # FMOD Banks
-*.bank
 *.bank.meta
