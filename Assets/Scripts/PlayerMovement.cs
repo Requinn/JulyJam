@@ -11,7 +11,10 @@ namespace JulyJam.Player{
         [SerializeField] private float lateralSpeed = 7f; //how fast we move sideways
         [SerializeField] private float verticalSpeed = 2f; //how fast we climb up and down ladders
         private CharacterController _Controller;
+        private Interactable _currentAccessibleObject;
+
         public bool isInteracting = false;
+
         //var to store currently occupied itneractable area
         // Use this for initialization
 
@@ -29,9 +32,17 @@ namespace JulyJam.Player{
         /// get input for interaction
         /// </summary>
         private void GetInteractInput(){
-            if (Input.GetKeyDown(KeyCode.E)){
-                //act on the interacted object
+            if (Input.GetKeyDown(KeyCode.J) && _currentAccessibleObject != null){
+                _currentAccessibleObject.Interact(this);
             }
+        }
+
+        void OnTriggerEnter(Collider c){
+            _currentAccessibleObject = c.GetComponent<Interactable>();
+        }
+
+        void OnTriggerExit(Collider c){
+            _currentAccessibleObject = null;
         }
 
         /// <summary>
