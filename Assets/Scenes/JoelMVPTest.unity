@@ -5611,8 +5611,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.7845035, y: 2.5, z: 3.8336768}
-  m_Center: {x: 0.60775185, y: 1.25, z: -1.9168367}
+  m_Size: {x: 2.7845032, y: 2.5, z: 3.8336766}
+  m_Center: {x: 0.6077518, y: 1.25, z: -1.9168366}
 --- !u!114 &1195050639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5962,7 +5962,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0.9659258, z: -0, w: 0.25881907}
   m_LocalPosition: {x: 33.75, y: 8.75, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2036322664}
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: -150, z: 0}
@@ -8690,7 +8691,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2401136
+  m_Name: pb_Mesh21056
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -16659,6 +16660,47 @@ Mesh:
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
   m_MeshOptimized: 0
+--- !u!1 &2036322663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2036322664}
+  - component: {fileID: 2036322665}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2036322664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2036322663}
+  m_LocalRotation: {x: 0, y: 0.9659258, z: 0, w: 0.2588191}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1195050643}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!65 &2036322665
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2036322663}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2228436, y: 4.6665764, z: 5.6956534}
+  m_Center: {x: -0.6114219, y: 1.8332882, z: 1.8703811}
 --- !u!43 &2046629242
 Mesh:
   m_ObjectHideFlags: 0
