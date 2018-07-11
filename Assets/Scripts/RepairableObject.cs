@@ -17,6 +17,8 @@ public class RepairableObject : Interactable{
     [SerializeField] private bool _isBroken;
     private bool _isDestroyed;
 
+    public Healthbar irrepairableTimerUI;
+
     //a part is destroyed, remove health
     public delegate void PartDestroyedEvent(float damage, RepairableObject rObject);
     public PartDestroyedEvent PartDestroyed;
@@ -50,8 +52,11 @@ public class RepairableObject : Interactable{
 	            _timeSinceLastCheck = 0;
             }
 	    }
-	    if (_isBroken && !_isDestroyed){
+	    if (_isBroken && !_isDestroyed && _isInteractable){
 	        _destroyTimer += Time.deltaTime;
+	        if (irrepairableTimerUI){
+	            irrepairableTimerUI.UpdateHealthBar((_irrepairableTime - _destroyTimer) / _irrepairableTime);
+	        }
 	        if (_destroyTimer >= _irrepairableTime){
 	            DestroyObject();
 	        }
@@ -63,8 +68,10 @@ public class RepairableObject : Interactable{
     /// </summary>
     public void BreakObject(){
         _isBroken = true;
+        _destroyTimer = 0f;
         PartBroken(_partHealthDrain);
         needsRepairMarker.SetActive(true);
+        irrepairableTimerUI.gameObject.SetActive(true);
         //start counting draining health until
         //do some fx and sprite swaps in here
     }
@@ -76,6 +83,7 @@ public class RepairableObject : Interactable{
         _isDestroyed = true;
         _isInteractable = false;
         needsRepairMarker.SetActive(false);
+        irrepairableTimerUI.gameObject.SetActive(false);
         isDestroyedMarker.SetActive(true);
         PartDestroyed(_totalShipDamage, this);
     }
@@ -84,6 +92,7 @@ public class RepairableObject : Interactable{
     /// </summary>
     public void RepairObject(){
         needsRepairMarker.SetActive(false);
+        irrepairableTimerUI.gameObject.SetActive(false);
         PartRepaired(_partHealthDrain);
         _isBroken = false;
     }
