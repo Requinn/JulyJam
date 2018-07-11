@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JulyJam.Core;
+using JulyJam.Interactables;
 using UnityEngine;
 using UnityScript.Steps;
 
@@ -9,7 +11,7 @@ namespace JulyJam.Player{
     /// </summary>
     public class PlayerMovement : MonoBehaviour{
         [SerializeField] private float lateralSpeed = 7f; //how fast we move sideways
-        [SerializeField] private float verticalSpeed = 2f; //how fast we climb up and down ladders
+        [SerializeField] private float verticalSpeed = 2f; //how fast we climb up and down ladders, Pending Cut
         private CharacterController _Controller;
         private Interactable _currentAccessibleObject;
 
@@ -20,6 +22,7 @@ namespace JulyJam.Player{
 
         void Start(){
             _Controller = GetComponent<CharacterController>();
+            GameController.Instance.GameOver += HaltInput;
         }
 
         // Update is called once per frame
@@ -37,6 +40,13 @@ namespace JulyJam.Player{
             }
         }
 
+        /// <summary>
+        /// Game is over, just set our speed to 0;
+        /// </summary>
+        private void HaltInput() {
+            lateralSpeed = 0;
+        }
+
         void OnTriggerEnter(Collider c){
             _currentAccessibleObject = c.GetComponent<Interactable>();
         }
@@ -49,7 +59,7 @@ namespace JulyJam.Player{
         /// Get input for movement
         /// </summary>
         void GetMovementInput(){
-            //Check if we're on a ladder or not
+            //Check if we're interacting
             if (!isInteracting) {
                 _Controller.Move(new Vector3(Input.GetAxis("Horizontal") * -lateralSpeed, 0, 0));
             }
