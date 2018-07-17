@@ -29,7 +29,6 @@ namespace JulyJam.Interactables{
 
         //a part is destroyed, remove health
         public delegate void PartDestroyedEvent(float damage, RepairableObject rObject);
-
         public PartDestroyedEvent PartDestroyed;
 
         //a part is broken, add drain to ship
@@ -47,6 +46,7 @@ namespace JulyJam.Interactables{
         public GameObject needsRepairMarker;
         public GameObject isDestroyedMarker;
         public Text inputDirectorField;
+        public GameObject inputIndicatorArrow;
 
         private float _timeSinceLastCheck = 0f;
         private float _destroyTimer = 0f; //time until the part is destroyed
@@ -125,6 +125,7 @@ namespace JulyJam.Interactables{
             Array.Reverse(s);
             inputDirectorField.text = new string(s);
             inputDirectorField.gameObject.SetActive(true);
+            inputIndicatorArrow.transform.localPosition = new Vector3(35f,50f,0); //reset arrow to homeposition
         }
 
         /// <summary>
@@ -161,7 +162,7 @@ namespace JulyJam.Interactables{
                 _player = player;
                 _isInteractable = false;
                 _player.isInteracting = true;
-
+                inputIndicatorArrow.SetActive(true);
                 //Timing.RunCoroutine(DoRepair(player));
             }
         }
@@ -175,7 +176,8 @@ namespace JulyJam.Interactables{
                 //check if the current key is what we pressed
                 if (_solutionStack.Peek() == key){
                     //visual hooks here
-         
+                    //shift prism on X + 125 per letter completed
+                    inputIndicatorArrow.transform.localPosition += new Vector3(125f,0,0);
                     //if so pop
                     _solutionStack.Pop();
                     HealShip(_shipRecoverValue); //heal the ship a little since we hit a key successfully
@@ -185,6 +187,7 @@ namespace JulyJam.Interactables{
                     RepairObject();
                     _player.isInteracting = false;
                     _player = null;
+                    inputIndicatorArrow.SetActive(false);
                 }
             }
         }
