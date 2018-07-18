@@ -28,6 +28,7 @@ namespace JulyJam.Core{
                 //maybe we keep drain permanently? or remove when destroyed
                 room.PartBroken += AccumulateDrain;
                 room.PartRepaired += RemoveDrain;
+                room.HealShip += RecoverHealth;
             }
             InvokeRepeating("HealthDrainTick", 1f, 1f);
         }
@@ -56,6 +57,7 @@ namespace JulyJam.Core{
         private void ReduceHealth(float damage, RepairableObject rObject){
             rObject.PartBroken -= AccumulateDrain;
             rObject.PartRepaired -= RemoveDrain;
+            rObject.HealShip -= RecoverHealth;
             totalHealth -= damage;
             currentHealth -= damage;
             CheckDeath();
@@ -70,6 +72,18 @@ namespace JulyJam.Core{
             CheckDeath();
             UIHealth.UpdateMaxBar(currentHealth, totalHealth, _absoluteMaxHealth);
             //UI update to show health falling
+        }
+
+
+        /// <summary>
+        /// Heal the ship by a value
+        /// </summary>
+        public void RecoverHealth(float health){
+            currentHealth += health;
+            //mathf.clamp not working???
+            if (currentHealth > totalHealth){
+                currentHealth = totalHealth;
+            }
         }
 
         /// <summary>

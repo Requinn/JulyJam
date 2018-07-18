@@ -14,7 +14,6 @@ namespace JulyJam.Player{
         [SerializeField] private float verticalSpeed = 2f; //how fast we climb up and down ladders, Pending Cut
         private CharacterController _Controller;
         private Interactable _currentAccessibleObject;
-
         public bool isInteracting = false;
 
         //var to store currently occupied itneractable area
@@ -35,8 +34,26 @@ namespace JulyJam.Player{
         /// get input for interaction
         /// </summary>
         private void GetInteractInput(){
-            if (Input.GetKeyDown(KeyCode.J) && _currentAccessibleObject != null){
-                _currentAccessibleObject.Interact(this);
+            //only bother checking if we have an object to interact with
+            if (_currentAccessibleObject != null){
+                //this is for regular interactions
+                if (Input.GetKeyDown(KeyCode.Space)){
+                    _currentAccessibleObject.Interact(this);
+                }
+                //send over the char of the key we hit
+                if (Input.GetKeyDown(KeyCode.H)){
+                    _currentAccessibleObject.Interact('H');
+                }
+                if (Input.GetKeyDown(KeyCode.J)) {
+                    _currentAccessibleObject.Interact('J');
+                }
+                if (Input.GetKeyDown(KeyCode.K)) {
+                    _currentAccessibleObject.Interact('K');
+                }
+                if (Input.GetKeyDown(KeyCode.L)) {
+                    _currentAccessibleObject.Interact('L');
+                }
+
             }
         }
 
@@ -61,7 +78,7 @@ namespace JulyJam.Player{
         void GetMovementInput(){
             //Check if we're interacting
             if (!isInteracting) {
-                _Controller.Move(new Vector3(Input.GetAxis("Horizontal") * -lateralSpeed, 0, 0));
+                _Controller.Move(new Vector3(Input.GetAxis("Horizontal") * lateralSpeed, 0, 0));
             }
         }
     }

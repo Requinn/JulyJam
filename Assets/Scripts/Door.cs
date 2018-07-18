@@ -20,6 +20,10 @@ namespace JulyJam.Interactables {
             }
         }
 
+        public override void Interact(char key){
+            //just do NOTHING
+        }
+
         /// <summary>
         /// Perform the movement up the stairs or whatever
         /// </summary>
@@ -27,12 +31,12 @@ namespace JulyJam.Interactables {
         private IEnumerator<float> DoClimb(PlayerMovement player){
             _isInteractable = false;
             player.isInteracting = true;
-            player.transform.position = transform.position + new Vector3(0, 0, -2f);
+            player.transform.position = transform.position + new Vector3(0, 0, 2f);
             yield return Timing.WaitForSeconds(timeToInteract);
             //LOOK HERE FOR FUCKED UP PLACEMENTS AFTER MOVING
             player.transform.position =
                 linkedDoor.transform.position +
-                new Vector3(0, -.5f, 2.5f); //+the distance from the middle of the platform to the door
+                new Vector3(0, -.5f, -2.5f); //+the distance from the middle of the platform to the door
             player.isInteracting = false;
             _isInteractable = true;
             yield return 0f;
