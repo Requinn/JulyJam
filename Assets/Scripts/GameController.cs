@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JulyJam.Player;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -7,8 +8,9 @@ using UnityEngine.SceneManagement;
 namespace JulyJam.Core{
     public class GameController : MonoBehaviour{
         [SerializeField] private ShipHandler _ship;
-        [SerializeField] private PlayerController _player;
+        [SerializeField] private PlayerMovement _player;
         public GameObject endScreenUI;
+        public GameObject pauseScreenUI;
 
         public static GameController Instance; //static ref to the game
 
@@ -40,7 +42,34 @@ namespace JulyJam.Core{
 
         // Update is called once per frame
         void Update(){
+            if (Input.GetKeyDown(KeyCode.Escape)){
+                if (pauseScreenUI.activeInHierarchy){
+                    ClosePauseMenu();
+                }
+                else{
+                    OpenPauseMenu();
+                }
+                //bring up the menu if active
+                //close if not active
+            }
+        }
 
+        /// <summary>
+        /// stop time and open the paus menu
+        /// </summary>
+        public void OpenPauseMenu(){
+            Time.timeScale = 0f;
+            pauseScreenUI.SetActive(true);
+            _player.HaltInput();
+        }
+
+        /// <summary>
+        /// resume time and close the menu
+        /// </summary>
+        public void ClosePauseMenu(){
+            Time.timeScale = 1f;
+            pauseScreenUI.SetActive(false);
+            _player.ResumeInput();
         }
     }
 }
