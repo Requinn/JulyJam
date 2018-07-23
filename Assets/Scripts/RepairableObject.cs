@@ -19,10 +19,11 @@ namespace JulyJam.Interactables{
         [SerializeField] private float _malfunctionWeight; //whats the chance we break on a check out of 100
         public float parthHealth = 100f; //how much hp this part has
         [SerializeField] private float _partHealthDrain = 1f; //how much health does this part drain when damaged
-        [SerializeField] private float _irrepairableTime = 90f; //time it takes to permanently damage the ship
+        [SerializeField] private float _irrepairableTime = 30f; //time it takes to permanently damage the ship
         [SerializeField] private float _totalShipDamage = 0f; //how much damage to the ship does this do when destroyed?
         [SerializeField] private float _shipRecoverValue = 20f; //how much does the ship heal by when repaired?
         [SerializeField] private bool _isBroken;
+        [SerializeField] private float _errorDamageValue = 5f; //how much time is deducted when the player makes a mistake
         private bool _isDestroyed;
 
         public Healthbar irrepairableTimerUI;
@@ -77,6 +78,7 @@ namespace JulyJam.Interactables{
                     _timeSinceLastCheck = 0;
                 }
             }
+            //tick down the repair timer
             if (_isBroken && !_isDestroyed && _isInteractable){
                 _destroyTimer += Time.deltaTime;
                 if (irrepairableTimerUI){
@@ -177,10 +179,21 @@ namespace JulyJam.Interactables{
                 if (_solutionStack.Peek() == key){
                     //visual hooks here
                     //shift prism on X + 125 per letter completed
-                    inputIndicatorArrow.transform.localPosition += new Vector3(125f,0,0);
+                    inputIndicatorArrow.transform.localPosition += new Vector3(125f, 0, 0);
                     //if so pop
                     _solutionStack.Pop();
                     HealShip(_shipRecoverValue); //heal the ship a little since we hit a key successfully
+                }
+                else{
+                    _destroyTimer += _errorDamageValue;
+                    if (irrepairableTimerUI) {
+                        irrepairableTimerUI.UpdateHealthBar((_irrepairableTime - _destroyTimer) / _irrepairableTime);
+                    }
+                    if (_destroyTimer >= _irrepairableTime) {
+                        _player.isInteracting = false;
+                        _player = null;
+                        DestroyObject();
+                    }
                 }
                 //check for when we are done
                 if (_solutionStack.Count == 0){
