@@ -48,6 +48,10 @@ namespace JLProject {
                     }
                 }**/
                 OnStartLoad(minimumWaitTime); //fire off an event for a loading screen or something
+                //handle a main menu call real quick
+                if (sceneIndex == 0){
+                    Time.timeScale = 1f;
+                }
                 Timing.RunCoroutine(CoLoadScene(sceneIndex));
 
             }
