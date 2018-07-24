@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using JulyJam.Interactables;
 using JulyJam.UI;
+using MovementEffects;
 using UnityEngine;
 
 namespace JulyJam.Core{
@@ -10,10 +11,12 @@ namespace JulyJam.Core{
         private float _absoluteMaxHealth;
         public float currentHealth;
         public RepairableObject[] Rooms;
-
+        public ScoreUpdater ScoreUpdate;
         public Healthbar UIHealth;
         private float _currentDrain = 0f; //how much hp/s we lose
-
+        private int _scoreBoostInterval = 15; //every this seconds you gain an amount of points
+        private int _scoreBoostAmount = 150; //how much score to add
+        private int _currentCycle = 0; //used to keep track of the score boost intervals
         public delegate void ShipDeathEvent();
 
         public ShipDeathEvent ShipDeath;
@@ -28,9 +31,26 @@ namespace JulyJam.Core{
                 //maybe we keep drain permanently? or remove when destroyed
                 room.PartBroken += AccumulateDrain;
                 room.PartRepaired += RemoveDrain;
-                room.HealShip += RecoverHealth;
+                room.HealShip += IncreaseHealthAndScore;
             }
-            InvokeRepeating("HealthDrainTick", 1f, 1f);
+            Timing.RunCoroutine(TickDownHealth());
+        }
+
+        /// <summary>
+        /// Tick down health every second
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator<float> TickDownHealth(){
+            while (currentHealth > 0f){
+                yield return Timing.WaitForSeconds(1f);
+                HealthDrainTick();
+                _currentCycle++;
+                //every 15 seconds, add to the score
+                if (_currentCycle == 15){
+                    ScoreUpdate.AddToScore(_scoreBoostAmount);
+                }
+            }
+            yield return 0f;
         }
 
         /// <summary>
@@ -57,7 +77,7 @@ namespace JulyJam.Core{
         private void ReduceHealth(float damage, RepairableObject rObject){
             rObject.PartBroken -= AccumulateDrain;
             rObject.PartRepaired -= RemoveDrain;
-            rObject.HealShip -= RecoverHealth;
+            rObject.HealShip -= IncreaseHealthAndScore;
             totalHealth -= damage;
             currentHealth -= damage;
             CheckDeath();
@@ -78,8 +98,9 @@ namespace JulyJam.Core{
         /// <summary>
         /// Heal the ship by a value
         /// </summary>
-        public void RecoverHealth(float health){
+        public void IncreaseHealthAndScore(float health, int scoreIncrease){
             currentHealth += health;
+            ScoreUpdate.AddToScore(scoreIncrease); //increase the score
             //mathf.clamp not working???
             if (currentHealth > totalHealth){
                 currentHealth = totalHealth;

@@ -26,6 +26,8 @@ namespace JulyJam.Interactables{
         [SerializeField] private float _errorDamageValue = 5f; //how much time is deducted when the player makes a mistake
         private bool _isDestroyed;
 
+        public int scoreValue = 25; //the amount of score you recieve per successful repair
+
         public Healthbar irrepairableTimerUI;
 
         //a part is destroyed, remove health
@@ -40,8 +42,8 @@ namespace JulyJam.Interactables{
         public delegate void PartRepairedEvent(float drain);
         public PartRepairedEvent PartRepaired;
 
-        //a part was partially repaired, heal the ship a little bit
-        public delegate void ShipHealedEvent(float value);
+        //a part was partially repaired, heal the ship a little bit and add to the score
+        public delegate void ShipHealedEvent(float value, int score);
         public ShipHealedEvent HealShip;
 
         public GameObject needsRepairMarker;
@@ -182,7 +184,7 @@ namespace JulyJam.Interactables{
                     inputIndicatorArrow.transform.localPosition += new Vector3(125f, 0, 0);
                     //if so pop
                     _solutionStack.Pop();
-                    HealShip(_shipRecoverValue); //heal the ship a little since we hit a key successfully
+                    HealShip(_shipRecoverValue, scoreValue); //heal the ship a little since we hit a key successfully
                 }
                 else{
                     _destroyTimer += _errorDamageValue;
