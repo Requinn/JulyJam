@@ -3852,41 +3852,24 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114548192040453624, guid: b727435d945ad8c4aa3b1ebf1f698502,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1929224905}
-    - target: {fileID: 114564917246085222, guid: b727435d945ad8c4aa3b1ebf1f698502,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1929224905}
     - target: {fileID: 114816484442597336, guid: b727435d945ad8c4aa3b1ebf1f698502,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1536615686}
+    - target: {fileID: 114564917246085222, guid: b727435d945ad8c4aa3b1ebf1f698502,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1929224905}
+    - target: {fileID: 114548192040453624, guid: b727435d945ad8c4aa3b1ebf1f698502,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1929224905}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b727435d945ad8c4aa3b1ebf1f698502, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &568279049 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1155401816207086, guid: b727435d945ad8c4aa3b1ebf1f698502,
-    type: 2}
-  m_PrefabInternal: {fileID: 568279047}
---- !u!114 &568279050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 568279049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e83df96c14fde794eab1111834921e84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScoreText: {fileID: 2122570440}
 --- !u!1 &607270628
 GameObject:
   m_ObjectHideFlags: 0
@@ -4961,7 +4944,12 @@ Prefab:
         type: 2}
       propertyPath: ScoreUpdate
       value: 
-      objectReference: {fileID: 568279050}
+      objectReference: {fileID: 2095879797}
+    - target: {fileID: 114910054607570168, guid: d9c1cefe2debb4147b78dace2e6e2b7b,
+        type: 2}
+      propertyPath: totalHealth
+      value: 2000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9c1cefe2debb4147b78dace2e6e2b7b, type: 2}
   m_IsPrefabAsset: 0
@@ -6725,6 +6713,12 @@ Mesh:
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
   m_MeshOptimized: 0
+--- !u!114 &1229559835 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114674430072790868, guid: b727435d945ad8c4aa3b1ebf1f698502,
+    type: 2}
+  m_PrefabInternal: {fileID: 568279047}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1295538976
 GameObject:
   m_ObjectHideFlags: 0
@@ -14330,11 +14324,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114691085149433862, guid: 4a2e0de9197129045a29ae6580fe8597,
+        type: 2}
+      propertyPath: ScoreText
+      value: 
+      objectReference: {fileID: 2122570440}
+    - target: {fileID: 114691085149433862, guid: 4a2e0de9197129045a29ae6580fe8597,
+        type: 2}
+      propertyPath: FinalScoreText
+      value: 
+      objectReference: {fileID: 1229559835}
     - target: {fileID: 114718565316513148, guid: 4a2e0de9197129045a29ae6580fe8597,
         type: 2}
       propertyPath: _ship
       value: 
       objectReference: {fileID: 1344604406}
+    - target: {fileID: 114718565316513148, guid: 4a2e0de9197129045a29ae6580fe8597,
+        type: 2}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 90102653}
     - target: {fileID: 114718565316513148, guid: 4a2e0de9197129045a29ae6580fe8597,
         type: 2}
       propertyPath: endScreenUI
@@ -14345,19 +14354,15 @@ Prefab:
       propertyPath: pauseScreenUI
       value: 
       objectReference: {fileID: 1394109845}
-    - target: {fileID: 114718565316513148, guid: 4a2e0de9197129045a29ae6580fe8597,
-        type: 2}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 90102653}
-    - target: {fileID: 114718565316513148, guid: 4a2e0de9197129045a29ae6580fe8597,
-        type: 2}
-      propertyPath: _score
-      value: 
-      objectReference: {fileID: 568279050}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a2e0de9197129045a29ae6580fe8597, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &2095879797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114691085149433862, guid: 4a2e0de9197129045a29ae6580fe8597,
+    type: 2}
+  m_PrefabInternal: {fileID: 2095879795}
+  m_Script: {fileID: 11500000, guid: e83df96c14fde794eab1111834921e84, type: 3}
 --- !u!114 &2122570440 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114819218359974310, guid: b727435d945ad8c4aa3b1ebf1f698502,

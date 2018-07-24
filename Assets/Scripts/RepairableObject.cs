@@ -31,7 +31,7 @@ namespace JulyJam.Interactables{
         public Healthbar irrepairableTimerUI;
 
         //a part is destroyed, remove health
-        public delegate void PartDestroyedEvent(float damage, RepairableObject rObject);
+        public delegate void PartDestroyedEvent(float damage, float originalDrain, RepairableObject rObject);
         public PartDestroyedEvent PartDestroyed;
 
         //a part is broken, add drain to ship
@@ -135,14 +135,17 @@ namespace JulyJam.Interactables{
         /// <summary>
         /// called to make this part permanently broken
         /// </summary>
-        public void DestroyObject(){
+        public void DestroyObject(){ 
+            //break this part and make it non interactable
             _isDestroyed = true;
             _isInteractable = false;
+            //turn of all the ui
             needsRepairMarker.SetActive(false);
             irrepairableTimerUI.gameObject.SetActive(false);
             isDestroyedMarker.SetActive(true);
             inputDirectorField.gameObject.SetActive(false);
-            PartDestroyed(_totalShipDamage, this);
+            //send the event we broke
+            PartDestroyed(_totalShipDamage, _partHealthDrain, this);
         }
 
         /// <summary>

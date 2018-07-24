@@ -9,7 +9,6 @@ namespace JulyJam.Core{
     public class GameController : MonoBehaviour{
         [SerializeField] private ShipHandler _ship;
         [SerializeField] private PlayerMovement _player;
-        [SerializeField] private ScoreUpdater _score;
 
         public GameObject endScreenUI;
         public GameObject pauseScreenUI;

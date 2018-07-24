@@ -27,7 +27,7 @@ namespace JulyJam.Core{
             UIHealth.UpdateMaxBar(currentHealth, totalHealth, _absoluteMaxHealth);
             foreach (var room in Rooms){
                 //totalHealth += room.parthHealth;
-                room.PartDestroyed += ReduceHealth;
+                room.PartDestroyed += HandleRoomDestroyed;
                 //maybe we keep drain permanently? or remove when destroyed
                 room.PartBroken += AccumulateDrain;
                 room.PartRepaired += RemoveDrain;
@@ -54,6 +54,20 @@ namespace JulyJam.Core{
         }
 
         /// <summary>
+        /// Handle when a room is destroyed by reducing health, unsubbing from that room, and halving the rooms drain
+        /// </summary>
+        /// <param name="damage"></param>
+        /// <param name="rObject"></param>
+        private void HandleRoomDestroyed(float damage, float originalDrain, RepairableObject rObject) {
+            rObject.PartBroken -= AccumulateDrain;
+            rObject.PartRepaired -= RemoveDrain;
+            rObject.HealShip -= IncreaseHealthAndScore;
+            ReduceHealth(damage);
+            //halve the drain for balance, rounding up
+            RemoveDrain(Mathf.CeilToInt(originalDrain / 2));
+        }
+
+        /// <summary>
         /// add onto the drain
         /// </summary>
         /// <param name="drain"></param>
@@ -67,17 +81,17 @@ namespace JulyJam.Core{
         /// <param name="drain"></param>
         private void RemoveDrain(float drain){
             _currentDrain -= drain;
+            if (_currentDrain < 0){
+                _currentDrain = 0f;
+            }
         }
 
         /// <summary>
-        /// Take damage from a part being destroyed
+        /// Take permanent damage from a part being destroyed
         /// </summary>
         /// <param name="damage"></param>
         /// <param name="rObject"></param>
-        private void ReduceHealth(float damage, RepairableObject rObject){
-            rObject.PartBroken -= AccumulateDrain;
-            rObject.PartRepaired -= RemoveDrain;
-            rObject.HealShip -= IncreaseHealthAndScore;
+        private void ReduceHealth(float damage){
             totalHealth -= damage;
             currentHealth -= damage;
             CheckDeath();
