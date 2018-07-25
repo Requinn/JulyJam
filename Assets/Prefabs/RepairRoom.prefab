@@ -43,6 +43,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1217065038242246
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4999787883249710}
+  m_Layer: 0
+  m_Name: DestroyedMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1258415046441946
 GameObject:
   m_ObjectHideFlags: 1
@@ -92,12 +107,12 @@ GameObject:
   - component: {fileID: 33323398137077680}
   - component: {fileID: 23268116111537850}
   m_Layer: 0
-  m_Name: RepairMarker
+  m_Name: WorldRepairMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1344446334477736
 GameObject:
   m_ObjectHideFlags: 1
@@ -133,6 +148,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1435615687068804
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4302473645346828}
+  m_Layer: 0
+  m_Name: RepairMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1508097672730904
 GameObject:
   m_ObjectHideFlags: 1
@@ -161,12 +191,12 @@ GameObject:
   - component: {fileID: 33315295181012358}
   - component: {fileID: 23341005041822208}
   m_Layer: 0
-  m_Name: DestroyedMarker
+  m_Name: WorldDestroyedMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1628132734007510
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,11 +329,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1608438817893040}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 3.7642, y: 3.342, z: 1}
-  m_Children:
-  - {fileID: 4123543673159624}
-  m_Father: {fileID: 4885390711187224}
+  m_LocalPosition: {x: 0, y: 0.24999993, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4999787883249710}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4104105557652826
@@ -316,7 +345,7 @@ Transform:
   m_LocalPosition: {x: 0.13283035, y: 0.074805506, z: -2.75}
   m_LocalScale: {x: 3.9849105, y: 1.4961101, z: 0.1}
   m_Children: []
-  m_Father: {fileID: 4501271874147312}
+  m_Father: {fileID: 4302473645346828}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4123543673159624
@@ -329,7 +358,7 @@ Transform:
   m_LocalPosition: {x: 0.13283035, y: 0.074805506, z: -2.75}
   m_LocalScale: {x: 3.9849105, y: 1.4961101, z: 0.099999994}
   m_Children: []
-  m_Father: {fileID: 4043652615082876}
+  m_Father: {fileID: 4999787883249710}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4128799832077644
@@ -345,6 +374,21 @@ Transform:
   m_Father: {fileID: 4441770903804252}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4302473645346828
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1435615687068804}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 3.7642, y: 3.342, z: 1}
+  m_Children:
+  - {fileID: 4104105557652826}
+  - {fileID: 4501271874147312}
+  m_Father: {fileID: 4885390711187224}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4441770903804252
 Transform:
   m_ObjectHideFlags: 1
@@ -352,7 +396,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1145100436457190}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.25, y: 2.75, z: -8.25}
+  m_LocalPosition: {x: 28.75, y: 2.75, z: -8.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4128799832077644}
@@ -367,13 +411,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1273518860697326}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 3.7642, y: 3.342, z: 1}
-  m_Children:
-  - {fileID: 4104105557652826}
-  m_Father: {fileID: 4885390711187224}
-  m_RootOrder: 0
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.24999993, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4302473645346828}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4553379498867662
 Transform:
@@ -411,11 +454,26 @@ Transform:
   m_LocalPosition: {x: 0, y: 2, z: 2.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4501271874147312}
-  - {fileID: 4043652615082876}
+  - {fileID: 4302473645346828}
+  - {fileID: 4999787883249710}
   - {fileID: 224474036670347026}
   m_Father: {fileID: 4441770903804252}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4999787883249710
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217065038242246}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 3.7642, y: 3.342, z: 1}
+  m_Children:
+  - {fileID: 4123543673159624}
+  - {fileID: 4043652615082876}
+  m_Father: {fileID: 4885390711187224}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23043452179871164
 MeshRenderer:
@@ -1809,15 +1867,16 @@ MonoBehaviour:
   _malfunctionInterval: 2
   _malfunctionWeight: 15
   parthHealth: 100
-  _partHealthDrain: 5
+  _partHealthDrain: 10
   _irrepairableTime: 15
   _totalShipDamage: 400
-  _shipRecoverValue: 12
+  _shipRecoverValue: 15
   _isBroken: 0
   _errorDamageValue: 3
+  scoreValue: 25
   irrepairableTimerUI: {fileID: 114253805651768064}
-  needsRepairMarker: {fileID: 1273518860697326}
-  isDestroyedMarker: {fileID: 1608438817893040}
+  needsRepairMarker: {fileID: 1435615687068804}
+  isDestroyedMarker: {fileID: 1217065038242246}
   inputDirectorField: {fileID: 114267779652928310}
   inputIndicatorArrow: {fileID: 1259443834930984}
   difficulty: 4

@@ -20,8 +20,9 @@ namespace JulyJam.Interactables {
             }
         }
 
-        public override void Interact(char key){
+        public override bool Interact(char key){
             //just do NOTHING
+            return true;
         }
 
         /// <summary>

@@ -174,11 +174,13 @@ namespace JulyJam.Interactables{
             }
         }
 
+        //TODO: maybe have this do a return value
         /// <summary>
         /// Accept individual key inputs for the repair minigame
         /// </summary>
         /// <param name="key"></param>
-        public override void Interact(char key){
+        public override bool Interact(char key){
+            bool isRepaired = false;
             if (_player != null && _player.isInteracting){
                 //check if the current key is what we pressed
                 if (_solutionStack.Peek() == key){
@@ -188,6 +190,7 @@ namespace JulyJam.Interactables{
                     //if so pop
                     _solutionStack.Pop();
                     HealShip(_shipRecoverValue, scoreValue); //heal the ship a little since we hit a key successfully
+                    isRepaired = true;
                 }
                 else{
                     _destroyTimer += _errorDamageValue;
@@ -207,7 +210,9 @@ namespace JulyJam.Interactables{
                     _player = null;
                     inputIndicatorArrow.SetActive(false);
                 }
+                return isRepaired;
             }
+            return false; //this should never be returned
         }
 
         /// <summary>

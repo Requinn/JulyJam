@@ -17,13 +17,17 @@ namespace JulyJam.Player{
         public bool isInteracting = false;
         private float _storedLateralSpeed; //used to hold the base assigned speed
         private bool isHalted = false; //are we stopped by the ui?
-        
+
+        private float _currentHorizontalInput = 0f;
+        private PlayerAnimator _Animator;
+
         // Use this for initialization
 
         void Start(){
             _storedLateralSpeed = lateralSpeed;
             _Controller = GetComponent<CharacterController>();
             GameController.Instance.GameOver += HaltInput;
+            _Animator = GetComponent<PlayerAnimator>();
         }
 
         // Update is called once per frame
@@ -37,6 +41,7 @@ namespace JulyJam.Player{
         /// </summary>
         private void GetInteractInput(){
             //only bother checking if we have an object to interact with
+            bool isSuccessfulHit = false;
             if (_currentAccessibleObject != null && !isHalted){
                 //this is for regular interactions
                 if (Input.GetKeyDown(KeyCode.Space)){
@@ -44,18 +49,25 @@ namespace JulyJam.Player{
                 }
                 //send over the char of the key we hit
                 if (Input.GetKeyDown(KeyCode.H)){
-                    _currentAccessibleObject.Interact('H');
+                    isSuccessfulHit = _currentAccessibleObject.Interact('H');
                 }
-                if (Input.GetKeyDown(KeyCode.J)) {
-                    _currentAccessibleObject.Interact('J');
+                else if (Input.GetKeyDown(KeyCode.J)) {
+                    isSuccessfulHit = _currentAccessibleObject.Interact('J');
                 }
-                if (Input.GetKeyDown(KeyCode.K)) {
-                    _currentAccessibleObject.Interact('K');
+                else if (Input.GetKeyDown(KeyCode.K)) {
+                    isSuccessfulHit = _currentAccessibleObject.Interact('K');
                 }
-                if (Input.GetKeyDown(KeyCode.L)) {
-                    _currentAccessibleObject.Interact('L');
+                else if (Input.GetKeyDown(KeyCode.L)) {
+                    isSuccessfulHit = _currentAccessibleObject.Interact('L');
                 }
 
+                //we did a successful repair
+                if (isSuccessfulHit){
+                    _Animator.PlayHammerStrike();
+                }
+                else{
+                    //do a failure animation
+                }
             }
         }
 
@@ -88,8 +100,22 @@ namespace JulyJam.Player{
         /// </summary>
         void GetMovementInput(){
             //Check if we're interacting
-            if (!isInteracting) {
-                _Controller.Move(new Vector3(Input.GetAxis("Horizontal") * lateralSpeed, 0, 0));
+            _currentHorizontalInput = Input.GetAxis("Horizontal");
+            if (!isInteracting){
+                _Controller.Move(new Vector3(_currentHorizontalInput * lateralSpeed, 0, 0));
+            }
+            //Handle the animations for directional movements
+            if (_currentHorizontalInput > 0){
+                _Animator.UpdateOrientation(true);
+                _Animator.UpdateMovement(true);
+            }
+            if (_currentHorizontalInput < 0){
+                _Animator.UpdateOrientation(false);
+                _Animator.UpdateMovement(true);
+            }
+            if (_currentHorizontalInput == 0){
+                //_Animator.PlayIdle();
+                _Animator.UpdateMovement(false);
             }
         }
 
