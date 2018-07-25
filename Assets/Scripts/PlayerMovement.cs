@@ -46,6 +46,7 @@ namespace JulyJam.Player{
                 //this is for regular interactions
                 if (Input.GetKeyDown(KeyCode.Space)){
                     _currentAccessibleObject.Interact(this);
+                    _Animator.UpdateMovement(false);
                 }
                 //send over the char of the key we hit
                 if (Input.GetKeyDown(KeyCode.H)){
@@ -101,21 +102,27 @@ namespace JulyJam.Player{
         void GetMovementInput(){
             //Check if we're interacting
             _currentHorizontalInput = Input.GetAxis("Horizontal");
+            //only do movement when we aren't itneracting
             if (!isInteracting){
                 _Controller.Move(new Vector3(_currentHorizontalInput * lateralSpeed, 0, 0));
-            }
-            //Handle the animations for directional movements
-            if (_currentHorizontalInput > 0){
-                _Animator.UpdateOrientation(true);
-                _Animator.UpdateMovement(true);
-            }
-            if (_currentHorizontalInput < 0){
-                _Animator.UpdateOrientation(false);
-                _Animator.UpdateMovement(true);
-            }
-            if (_currentHorizontalInput == 0){
-                //_Animator.PlayIdle();
-                _Animator.UpdateMovement(false);
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow)){
+                    //Handle the animations for directional movements
+                    if (_currentHorizontalInput > 0){
+                        _Animator.UpdateOrientation(true);
+                        _Animator.UpdateMovement(true);
+                    }
+                    if (_currentHorizontalInput < 0){
+                        _Animator.UpdateOrientation(false);
+                        _Animator.UpdateMovement(true);
+                    }
+                }
+                else{
+                    if (_currentHorizontalInput == 0){
+                        //_Animator.PlayIdle();
+                        _Animator.UpdateMovement(false);
+                    }
+
+                }
             }
         }
 
