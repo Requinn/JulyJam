@@ -260,7 +260,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1056
+  m_Name: pb_Mesh-3596
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -504,7 +504,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2392696
+  m_Name: pb_Mesh14706
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -2333,7 +2333,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh5066
+  m_Name: pb_Mesh14996
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -6063,7 +6063,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh4840
+  m_Name: pb_Mesh14826
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -9178,6 +9178,7 @@ GameObject:
   - component: {fileID: 1770493720}
   - component: {fileID: 1770493719}
   - component: {fileID: 1770493722}
+  - component: {fileID: 1770493723}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9275,6 +9276,28 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Cinemachine.CinemachineBrain+VcamEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1770493723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1770493718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Ambiance/Ship
+  PlayEvent: 1
+  StopEvent: 2
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 1
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!43 &1771874728
 Mesh:
   m_ObjectHideFlags: 0
