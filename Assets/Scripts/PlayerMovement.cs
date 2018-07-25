@@ -105,7 +105,8 @@ namespace JulyJam.Player{
             //only do movement when we aren't itneracting
             if (!isInteracting){
                 _Controller.Move(new Vector3(_currentHorizontalInput * lateralSpeed, 0, 0));
-                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow)){
+                //if we are pressing a movement key, animate
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)){
                     //Handle the animations for directional movements
                     if (_currentHorizontalInput > 0){
                         _Animator.UpdateOrientation(true);
@@ -116,6 +117,7 @@ namespace JulyJam.Player{
                         _Animator.UpdateMovement(true);
                     }
                 }
+                //if we aren't and not moving, do the idle
                 else{
                     if (_currentHorizontalInput == 0){
                         //_Animator.PlayIdle();
