@@ -17,7 +17,6 @@ namespace JulyJam.Interactables{
     public class RepairableObject : Interactable{
         [SerializeField] private float _malfunctionInterval; //how often we roll a check
         [SerializeField] private float _malfunctionWeight; //whats the chance we break on a check out of 100
-        public float parthHealth = 100f; //how much hp this part has
         [SerializeField] private float _partHealthDrain = 1f; //how much health does this part drain when damaged
         [SerializeField] private float _irrepairableTime = 30f; //time it takes to permanently damage the ship
         [SerializeField] private float _totalShipDamage = 0f; //how much damage to the ship does this do when destroyed?

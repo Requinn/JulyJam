@@ -54,7 +54,7 @@ namespace JulyJam.Core{
         }
 
         /// <summary>
-        /// Handle when a room is destroyed by reducing health, unsubbing from that room, and halving the rooms drain
+        /// Handle when a room is destroyed by reducing health, unsubbing from that room, and reducing the rooms drain
         /// </summary>
         /// <param name="damage"></param>
         /// <param name="rObject"></param>
@@ -63,8 +63,8 @@ namespace JulyJam.Core{
             rObject.PartRepaired -= RemoveDrain;
             rObject.HealShip -= IncreaseHealthAndScore;
             ReduceHealth(damage);
-            //halve the drain for balance, rounding up
-            RemoveDrain(Mathf.CeilToInt(originalDrain / 2));
+            //quarter the drain for balance, rounding up
+            RemoveDrain(Mathf.CeilToInt(originalDrain / 4));
         }
 
         /// <summary>
