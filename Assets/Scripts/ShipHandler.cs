@@ -16,9 +16,10 @@ namespace JulyJam.Core{
         private float _currentDrain = 0f; //how much hp/s we lose
         private int _scoreBoostInterval = 10; //every this seconds you gain an amount of points
         private int _scoreBoostAmount = 100; //how much score to add
-        private int _currentCycle = 0; //used to keep track of the score boost intervals
+        private int _currentCycle = 0; //1s interval cycles
         public delegate void ShipDeathEvent();
 
+        private bool isDead = false;
         public ShipDeathEvent ShipDeath;
 
         // Use this for initialization
@@ -46,9 +47,8 @@ namespace JulyJam.Core{
                 HealthDrainTick();
                 _currentCycle++;
                 //every 15 seconds, add to the score
-                if (_currentCycle == _scoreBoostInterval) {
+                if (_currentCycle % _scoreBoostInterval == 0) {
                     ScoreUpdate.AddToScore(_scoreBoostAmount);
-                    _currentCycle = 0;
                 }
             }
             yield return 0f;
@@ -126,24 +126,27 @@ namespace JulyJam.Core{
         /// check if we died
         /// </summary>
         private void CheckDeath(){
-            //catch the case where our total health is wounded far too greatly
-            if (totalHealth <= 0){
-                totalHealth = 0;
-                currentHealth = 0;
-            }
-
-            //we did die
-            if (currentHealth <= 0){
-                CancelInvoke("HealthDrainTick"); //stop ticking down health
-                //Disable all the repairable rooms cause we ded
-                foreach (RepairableObject rObj in Rooms){
-                    rObj.gameObject.SetActive(false);
+            if (!isDead){
+                //catch the case where our total health is wounded far too greatly
+                if (totalHealth <= 0){
+                    totalHealth = 0;
+                    currentHealth = 0;
                 }
-                currentHealth = 0;
-                UIHealth.UpdateMaxBar(currentHealth, totalHealth, _absoluteMaxHealth);
-                ShipDeath();
-            }
 
+                //we did die
+                if (currentHealth <= 0){
+                    isDead = true;
+                    CancelInvoke("HealthDrainTick"); //stop ticking down health
+                    //Disable all the repairable rooms cause we ded
+                    foreach (RepairableObject rObj in Rooms){
+                        rObj.gameObject.SetActive(false);
+                    }
+                    currentHealth = 0;
+                    UIHealth.UpdateMaxBar(currentHealth, totalHealth, _absoluteMaxHealth);
+                    ScoreUpdate.FinalizeToLeaderBoard(_currentCycle);
+                    ShipDeath();
+                }
+            }
         }
     }
 }

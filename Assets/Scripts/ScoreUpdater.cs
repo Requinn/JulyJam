@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using JulyJam.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -39,6 +40,16 @@ public class ScoreUpdater : MonoBehaviour{
     /// update the score ui
     /// </summary>
     private void UpdateText(){
-        ScoreText.text = _currentScore.ToString();
+        if (ScoreText != null){
+            ScoreText.text = _currentScore.ToString();
+        }
+    }
+
+    /// <summary>
+    /// Save the score to a local leaderboard, passing in the time survived on the level as a part of the score
+    /// </summary>
+    public void FinalizeToLeaderBoard(int totalTime){
+        LocalLeaderboardsHandler.Instance.SaveScoresToFile(new LeaderBoardEntry(SceneManager.GetActiveScene().name, totalTime, _currentScore));
+        LocalLeaderboardsHandler.Instance.CheckAgainstLeaderBoard(new LeaderBoardEntry(SceneManager.GetActiveScene().name, totalTime, _currentScore));
     }
 }
