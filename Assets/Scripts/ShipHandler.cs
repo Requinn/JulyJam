@@ -14,8 +14,8 @@ namespace JulyJam.Core{
         public ScoreUpdater ScoreUpdate;
         public Healthbar UIHealth;
         private float _currentDrain = 0f; //how much hp/s we lose
-        private int _scoreBoostInterval = 15; //every this seconds you gain an amount of points
-        private int _scoreBoostAmount = 150; //how much score to add
+        private int _scoreBoostInterval = 10; //every this seconds you gain an amount of points
+        private int _scoreBoostAmount = 100; //how much score to add
         private int _currentCycle = 0; //used to keep track of the score boost intervals
         public delegate void ShipDeathEvent();
 
@@ -46,8 +46,9 @@ namespace JulyJam.Core{
                 HealthDrainTick();
                 _currentCycle++;
                 //every 15 seconds, add to the score
-                if (_currentCycle == 15){
+                if (_currentCycle == _scoreBoostInterval) {
                     ScoreUpdate.AddToScore(_scoreBoostAmount);
+                    _currentCycle = 0;
                 }
             }
             yield return 0f;
@@ -142,11 +143,6 @@ namespace JulyJam.Core{
                 UIHealth.UpdateMaxBar(currentHealth, totalHealth, _absoluteMaxHealth);
                 ShipDeath();
             }
-
-        }
-
-        // Update is called once per frame
-        void Update(){
 
         }
     }
