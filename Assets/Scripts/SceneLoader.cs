@@ -76,5 +76,12 @@ namespace JLProject {
             yield return Timing.WaitForSeconds(postReadyDelay);
             asyncLoad.allowSceneActivation = true;
         }
+
+        /// <summary>
+        /// Hi this shouldn't be here but we need it now just a little
+        /// </summary>
+        public void QuitGame(){
+            Application.Quit();
+        }
     }
 }
