@@ -49,7 +49,6 @@ public class ScoreUpdater : MonoBehaviour{
     /// Save the score to a local leaderboard, passing in the time survived on the level as a part of the score
     /// </summary>
     public void FinalizeToLeaderBoard(int totalTime){
-        LocalLeaderboardsHandler.Instance.SaveScoresToFile(new LeaderBoardEntry(SceneManager.GetActiveScene().name, totalTime, _currentScore));
         LocalLeaderboardsHandler.Instance.CheckAgainstLeaderBoard(new LeaderBoardEntry(SceneManager.GetActiveScene().name, totalTime, _currentScore));
     }
 }

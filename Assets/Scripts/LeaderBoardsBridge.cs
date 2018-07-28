@@ -33,8 +33,12 @@ public class LeaderBoardsBridge : MonoBehaviour {
     private string ConvertIntToTime(int time) {
         int minutes = time / 60;
         int seconds = time % 60;
-
-        string timeinString = minutes.ToString() + ":" + seconds.ToString();
+        string fixedSeconds = seconds.ToString();
+        //add in a 0 infront of single digit seconds
+        if (fixedSeconds.Length == 1){
+            fixedSeconds = "0" + fixedSeconds;
+        }
+        string timeinString = minutes.ToString() + ":" + fixedSeconds;
         return timeinString;
     }
 
