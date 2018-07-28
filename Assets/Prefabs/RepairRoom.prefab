@@ -396,7 +396,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1145100436457190}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 28.75, y: 2.75, z: -8.25}
+  m_LocalPosition: {x: -2.829571, y: -9.425259, z: 0.88135815}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4128799832077644}
@@ -411,13 +411,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1273518860697326}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.24999993, z: 0.75}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -1, w: -0.00000035762784}
+  m_LocalPosition: {x: 0, y: 0.06, z: 0.75}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0}
   m_Children: []
   m_Father: {fileID: 4302473645346828}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -179.99998}
 --- !u!4 &4553379498867662
 Transform:
   m_ObjectHideFlags: 1
@@ -525,7 +525,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 7c8489dc0415e8440819199464e90996, type: 2}
+  - {fileID: 2100000, guid: e9186d7610643d04aa5a9cf67dbf8c85, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1864,22 +1864,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToInteract: 1
-  _malfunctionInterval: 2
-  _malfunctionWeight: 15
-  parthHealth: 100
-  _partHealthDrain: 10
-  _irrepairableTime: 15
-  _totalShipDamage: 400
-  _shipRecoverValue: 15
+  _malfunctionInterval: 4
+  _malfunctionWeight: 30
+  _partHealthDrain: 15
+  _irrepairableTime: 25
+  _totalShipDamage: 300
+  _shipRecoverValue: 30
   _isBroken: 0
-  _errorDamageValue: 3
+  _errorDamageValue: 6
   scoreValue: 25
   irrepairableTimerUI: {fileID: 114253805651768064}
   needsRepairMarker: {fileID: 1435615687068804}
   isDestroyedMarker: {fileID: 1217065038242246}
   inputDirectorField: {fileID: 114267779652928310}
   inputIndicatorArrow: {fileID: 1259443834930984}
-  difficulty: 4
+  difficulty: 3
 --- !u!114 &114993618715225190
 MonoBehaviour:
   m_ObjectHideFlags: 1
