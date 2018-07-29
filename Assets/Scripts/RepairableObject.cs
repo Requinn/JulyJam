@@ -47,7 +47,6 @@ namespace JulyJam.Interactables{
 
         public GameObject needsRepairMarker;
         public GameObject isDestroyedMarker;
-        public Text inputDirectorField;
         public GameObject inputIndicatorArrow;
 
         private float _timeSinceLastCheck = 0f;
@@ -58,6 +57,8 @@ namespace JulyJam.Interactables{
         private readonly char[] _validKeys = new[]{'H', 'J', 'K', 'L'}; //all valid key presses
 
         private PlayerMovement _player;
+
+        public RepairableInputUI repairUI;
 
         void Start(){
             needsRepairMarker.SetActive(false);
@@ -116,6 +117,7 @@ namespace JulyJam.Interactables{
             for (int i = 0; i < difficulty; i++){
                 int index = Random.Range(0, 4);
                 _solutionStack.Push(_validKeys[index]);
+
                 //append input and direction of input
                 sb.Append(_validKeys[index]);
                 if (i != (int)difficulty - 1){
@@ -126,9 +128,11 @@ namespace JulyJam.Interactables{
             //inputs are added in FILO, so right to left is what they are being removed as, except human beans read left to right so we do this
             char[] s = sb.ToString().ToCharArray();
             Array.Reverse(s);
-            inputDirectorField.text = new string(s);
-            inputDirectorField.gameObject.SetActive(true);
-            inputIndicatorArrow.transform.localPosition = new Vector3(35f,50f,0); //reset arrow to homeposition
+            string temp = new string(s);
+            repairUI.DisplayInputString(temp);
+            //inputDirectorField.text = new string(s);
+            //inputDirectorField.gameObject.SetActive(true);
+            inputIndicatorArrow.transform.localPosition = new Vector3(-2.75f, 0.5f, -1.5f); //reset arrow to homeposition
         }
 
         /// <summary>
@@ -141,8 +145,8 @@ namespace JulyJam.Interactables{
             //turn of all the ui
             needsRepairMarker.SetActive(false);
             irrepairableTimerUI.gameObject.SetActive(false);
+            repairUI.DisableAll();
             isDestroyedMarker.SetActive(true);
-            inputDirectorField.gameObject.SetActive(false);
             //send the event we broke
             PartDestroyed(_totalShipDamage, _partHealthDrain, this);
         }
@@ -153,7 +157,7 @@ namespace JulyJam.Interactables{
         public void RepairObject(){
             needsRepairMarker.SetActive(false);
             irrepairableTimerUI.gameObject.SetActive(false);
-            inputDirectorField.gameObject.SetActive(false);
+            repairUI.DisableAll();
             PartRepaired(_partHealthDrain);
             _isInteractable = true;
             _isBroken = false;
@@ -185,7 +189,7 @@ namespace JulyJam.Interactables{
                 if (_solutionStack.Peek() == key){
                     //visual hooks here
                     //shift prism on X + 125 per letter completed
-                    inputIndicatorArrow.transform.localPosition += new Vector3(125f, 0, 0);
+                    inputIndicatorArrow.transform.localPosition += new Vector3(2.5f, 0, 0);
                     //if so pop
                     _solutionStack.Pop();
                     HealShip(_shipRecoverValue, scoreValue); //heal the ship a little since we hit a key successfully
