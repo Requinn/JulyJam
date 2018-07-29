@@ -4643,6 +4643,23 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fb33ca398b0d7f4eaa405a51340276a, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &801929784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1614505247940770, guid: 1fb33ca398b0d7f4eaa405a51340276a,
+    type: 2}
+  m_PrefabInternal: {fileID: 801929783}
+--- !u!114 &801929785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 801929784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9c3cccd8409114a99899f869a31599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayEvent: event:/Player/Walk
 --- !u!1001 &808727904
 Prefab:
   m_ObjectHideFlags: 0
