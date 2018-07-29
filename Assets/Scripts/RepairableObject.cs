@@ -145,6 +145,7 @@ namespace JulyJam.Interactables{
             //turn of all the ui
             needsRepairMarker.SetActive(false);
             irrepairableTimerUI.gameObject.SetActive(false);
+            inputIndicatorArrow.SetActive(false);
             repairUI.DisableAll();
             isDestroyedMarker.SetActive(true);
             //send the event we broke

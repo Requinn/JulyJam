@@ -22,7 +22,9 @@ namespace JulyJam.UI{
         public void UpdateMaxBar(float currentHp, float currentMax, float absoluteMax){
             _healthRatioAfterWound = currentMax / absoluteMax;
             maxHealthBar.fillAmount = _healthRatioAfterWound;
-            healthBar.fillAmount = (currentHp / currentMax) * _healthRatioAfterWound;
+            if (healthBar){
+                healthBar.fillAmount = (currentHp / currentMax) * _healthRatioAfterWound;
+            }
         }
     }
 }
