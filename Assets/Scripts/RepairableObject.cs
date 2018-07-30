@@ -21,6 +21,8 @@ namespace JulyJam.Interactables{
         [SerializeField] private bool _isBroken;
         [SerializeField] private float _errorDamageValue = 5f; //how much time is deducted when the player makes a mistake
         private bool _isDestroyed;
+        private float _repairRateRamping = 7.5f; //For every successful pass on the break roll, increase the % by this amount
+        private float _modifiedMalfunctionWt; //the current rate of failure after modification by the ramping;
 
         public int scoreValue = 25; //the amount of score you recieve per successful repair
 
@@ -58,6 +60,7 @@ namespace JulyJam.Interactables{
         public RepairableInputUI repairUI;
 
         void Start(){
+            _modifiedMalfunctionWt = _malfunctionWeight; //start off at baseline failure rate
             needsRepairMarker.SetActive(false);
             _solutionStack = new Stack<char>(Mathf.CeilToInt(difficulty)); //set the max cap of our stack to the difficulty
         }
@@ -70,9 +73,13 @@ namespace JulyJam.Interactables{
                 if (_timeSinceLastCheck >= Mathf.FloorToInt(_malfunctionInterval)){
                     //check if its time to roll
                     int rng = Random.Range(0, 101);
-                    if (rng < _malfunctionWeight){
+                    if (rng < _modifiedMalfunctionWt) {
                         //do the roll and check
                         BreakObject(); //we broke
+                        _modifiedMalfunctionWt = _malfunctionWeight; //reset the modified weight after a successful break
+                    }
+                    else{
+                        _modifiedMalfunctionWt += _repairRateRamping; // ramp the failure rate up everytime we don't break
                     }
                     _timeSinceLastCheck = 0;
                 }
