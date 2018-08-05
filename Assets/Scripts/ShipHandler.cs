@@ -38,6 +38,14 @@ namespace JulyJam.Core{
         }
 
         /// <summary>
+        /// get the ratio of current to max health in the ship
+        /// </summary>
+        /// <returns></returns>
+        public float GetShipHealthPercent(){
+            return currentHealth / totalHealth;
+        }
+
+        /// <summary>
         /// Tick down health every second
         /// </summary>
         /// <returns></returns>
